@@ -4,10 +4,6 @@ A tool to merge and Spotify playlists efficiently. Perfect for creating an end o
 
 ## Usage
 
-### Quick Start (Interactive Mode)
-
-The easiest way to use the tool is via the interactive CLI, which handles authentication, playlist selection, merging, and creation all in one go.
-
 1. **Setup**:
 
     - Install dependencies: `npm install`
@@ -25,23 +21,5 @@ The easiest way to use the tool is via the interactive CLI, which handles authen
     - Merge them.
     - Create a new playlist.
 
-### Manual Method (CSV)
-
-If you prefer working with CSV files (e.g., from Spotlistr):
-
-1. Export your Spotify playlists as CSV files from here: https://www.spotlistr.com/export/spotify-playlist.
-2. Place the exported CSV files in the `lists/` directory.
-3. Run the script to merge playlists:
-    ```bash
-    node merge_playlists.js
-    ```
-4. The merged playlist will be saved as `merged.csv` in the project root.
-5. (Optional) Upload to Spotify:
-    ```bash
-    node create_playlist.js
-    ```
-
-## TODO
-
--   [x] Add Spotify API integration for direct playlist reading and creation.
--   [ ] Add option to limit playlist length (e.g., maximum number of minutes) based on user preferences.
+## Known Issues
+- Spotify no longer returns 'Spotify owned' playlists via the API, so these cannot be selected or merged. Please use collaborative or user-created playlists, or manually create a playlist with the contents of the desired Spotify owned playlist. Source: [Spotify Community](https://developer.spotify.com/blog/2024-11-27-changes-to-the-web-api).
