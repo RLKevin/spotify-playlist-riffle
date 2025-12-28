@@ -18,16 +18,31 @@ try {
 	console.log(`Found ${files.length} files: ${files.join(', ')}`);
 
 	// Read all files
-	const fileContents = files.map((file) => {
+	let header = '';
+	const fileContents = files.map((file, index) => {
 		const content = fs.readFileSync(path.join(listsDir, file), 'utf-8');
 		// Split by newline, handling both Unix and Windows line endings
 		// We filter out empty lines that might result from trailing newlines
-		return content.split(/\r?\n/).filter((line) => line.length > 0);
+		const lines = content.split(/\r?\n/).filter((line) => line.length > 0);
+
+		if (index === 0 && lines.length > 0) {
+			header = lines[0];
+		}
+
+		// Remove the header from each file
+		if (lines.length > 0) {
+			lines.shift();
+		}
+		return lines;
 	});
 
 	// Find the maximum number of lines in any file
 	const maxLines = Math.max(...fileContents.map((lines) => lines.length));
 	const mergedLines = [];
+
+	if (header) {
+		mergedLines.push(header);
+	}
 
 	// Riffle shuffle: iterate through lines, then through files
 	for (let i = 0; i < maxLines; i++) {
