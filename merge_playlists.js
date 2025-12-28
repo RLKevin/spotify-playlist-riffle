@@ -1,8 +1,14 @@
 const fs = require('fs');
 const path = require('path');
+const readline = require('readline');
 
 const listsDir = path.join(__dirname, 'lists');
 const outputFile = path.join(__dirname, 'merged.csv');
+
+const rl = readline.createInterface({
+	input: process.stdin,
+	output: process.stdout,
+});
 
 try {
 	// Get all csv files from the lists directory
@@ -38,11 +44,7 @@ try {
 
 	// Find the maximum number of lines in any file
 	const maxLines = Math.max(...fileContents.map((lines) => lines.length));
-	const mergedLines = [];
-
-	if (header) {
-		mergedLines.push(header);
-	}
+	let mergedLines = [];
 
 	// Riffle shuffle: iterate through lines, then through files
 	for (let i = 0; i < maxLines; i++) {
@@ -54,11 +56,42 @@ try {
 		}
 	}
 
-	// Write the result to merged.csv
-	fs.writeFileSync(outputFile, mergedLines.join('\n'));
-	console.log(
-		`Successfully merged ${mergedLines.length} lines into ${outputFile}`
+	rl.question(
+		'Should duplicates be removed or kept? (remove/keep): ',
+		(answer) => {
+			const shouldRemove = answer.trim().toLowerCase() === 'remove';
+
+			if (shouldRemove) {
+				const uniqueLines = new Set();
+				const filteredLines = [];
+
+				mergedLines.forEach((line) => {
+					if (!uniqueLines.has(line)) {
+						uniqueLines.add(line);
+						filteredLines.push(line);
+					}
+				});
+				mergedLines = filteredLines;
+				console.log('Duplicates removed.');
+			} else {
+				console.log('Duplicates kept.');
+			}
+
+			// Add header back at the top
+			if (header) {
+				mergedLines.unshift(header);
+			}
+
+			// Write the result to merged.csv
+			fs.writeFileSync(outputFile, mergedLines.join('\n'));
+			console.log(
+				`Successfully merged ${mergedLines.length} lines into ${outputFile}`
+			);
+
+			rl.close();
+		}
 	);
 } catch (err) {
 	console.error('An error occurred:', err);
+	rl.close();
 }
