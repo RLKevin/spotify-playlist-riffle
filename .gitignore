@@ -2,6 +2,7 @@
 node_modules/
 output/
 .env
+spotify_tokens.json
 .vscode/
 lists/*
 merged.csv

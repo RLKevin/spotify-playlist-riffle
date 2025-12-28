@@ -1,0 +1,28 @@
+{
+	"name": "spotify-playlist-riffle",
+	"version": "1.0.0",
+	"description": "A tool to merge and Spotify playlists efficiently. Perfect for creating an end of year playlist to reflect your (and your friends') listening habits.",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/RLKevin/spotify-playlist-riffle.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/RLKevin/spotify-playlist-riffle/issues"
+	},
+	"homepage": "https://github.com/RLKevin/spotify-playlist-riffle#readme",
+	"dependencies": {
+		"dotenv": "^17.2.3",
+		"express": "^5.2.1",
+		"inquirer": "^8.2.5",
+		"open": "^8.4.2",
+		"spotify-web-api-node": "^5.0.2"
+	}
+}
