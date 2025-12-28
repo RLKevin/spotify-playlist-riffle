@@ -1,6 +1,6 @@
 # Spotify Playlist Riffle
 
-A tool to merge and Spotify playlists efficiently. Perfect for creating an end of year playlist to reflect your (and your friends') listening habits.
+A tool to merge Spotify playlists efficiently. Perfect for creating an end of year playlist to reflect your (and your friends') listening habits.
 
 ## Usage
 
