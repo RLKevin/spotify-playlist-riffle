@@ -11,3 +11,7 @@ A tool to merge and Spotify playlists efficiently. Perfect for creating an end o
    ```
 5. The merged playlist will be saved as `merged.csv` in the project root.
 6. Import the `merged.csv` file back into Spotify using Spotlistr: https://www.spotlistr.com/search/textbox.
+
+## TODO
+- [ ] Add Spotify API integration for direct playlist reading and creation.
+- [ ] Add option to limit playlist length (e.g., maximum number of minutes) based on user preferences.
